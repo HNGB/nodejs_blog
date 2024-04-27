@@ -7,9 +7,15 @@ class MeController {
             .then(courses => res.render('me/stored-courses', {
                 courses: multipleMogooseToObject(courses)
             }))
-            .catch(next)
-                
-            
+            .catch(next)        
+    }
+
+    trashCourses(req, res, next) {
+        Course.findWithDeleted({deleted:true})
+            .then(courses => res.render('me/trash-courses', {
+                courses: multipleMogooseToObject(courses)
+            }))
+            .catch(next)     
     }
 }
 
